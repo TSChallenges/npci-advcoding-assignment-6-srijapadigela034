@@ -1,46 +1,23 @@
 package com.mystore.app;
 
-class Product {
-    
-    private int id;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+@Component
+public class Product {
     private String name;
-    private String barcode;
+    private double price;
+    private Barcode barcode;
 
-    Barcode barCoder = new Barcode();
-
-    public Product() {
-        System.out.println("In Product constructor");
+    @Autowired
+    public Product(Barcode barcode) {
+        this.name = "Tumbler";
+        this.price = 99.99;
+        this.barcode = barcode;
     }
 
-    // Getter methods
-    public int getId() {
-        return id;
+    public void display() {
+        System.out.println("Product: " + name + ", Price: " + price);
+        barcode.printBarcode();
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getBarcode() {
-        return barcode;
-    }
-
-    // Setter methods
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setBarcode() {
-        this.barcode = barCoder.createBarcode(this);
-    }
-
-    @Override
-    public String toString() {
-        return "Product{id=" + id + ", name='" + name + "', barcode='" + barcode + "'}";
-    }
-
 }
